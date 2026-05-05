@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hemanth Varma Kanumuri — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: oklch(97.5% 0.002 60);
+    --bg-elev: oklch(99% 0.0015 60);
+    --ink: oklch(14% 0 0);
+    --ink-soft: oklch(34% 0.003 60);
+    --ink-mute: oklch(60% 0.005 60);
+    --rule: oklch(86% 0.004 60);
+    --rule-soft: oklch(92% 0.003 60);
+    --accent: oklch(48% 0.16 25);
+    --accent-soft: oklch(92% 0.04 25);
+    --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  * { box-sizing: border-box; }
+
+  /* selection */
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-mute); }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+  /* utility */
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); font-weight: 500; }
+  .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+  .serif-italic { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+  /* grain */
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 100;
+    opacity: 0.035; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ----- placeholder striped panel ----- */
+  .stripe-fill {
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--rule-soft) 0 1px,
+      transparent 1px 9px
+    );
+    background-color: var(--bg-elev);
+  }
+
+  /* ----- hero canvas cursor ----- */
+  .cursor-dot {
+    position: fixed; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); pointer-events: none; z-index: 999;
+    transform: translate(-50%, -50%); transition: opacity 0.2s, width 0.2s, height 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-dot.big { width: 36px; height: 36px; opacity: 0.6; }
+
+  /* hide native cursor on touch */
+  @media (hover: none) { .cursor-dot { display: none; } }
+
+  /* fade-in on enter */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* link underline */
+  .link {
+    position: relative; display: inline-flex; align-items: baseline; gap: 6px;
+    color: var(--ink);
+  }
+  .link::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+    background: currentColor; transform: scaleX(1); transform-origin: right;
+    transition: transform 0.4s cubic-bezier(.7,0,.2,1);
+  }
+  .link:hover::after { transform: scaleX(0); transform-origin: left; }
+  .link .arrow { display: inline-block; transition: transform 0.3s; }
+  .link:hover .arrow { transform: translate(2px, -2px); }
+
+  /* root */
+  #root { min-height: 100vh; }
+</style>
+
+<script type="application/json" id="github-projects">
+[
+  {
+    "name": "Resume Screener",
+    "repo": "Hemz2006/Resume-Screener",
+    "year": "2025",
+    "stack": ["MERN", "GPT-4o", "NLP"],
+    "kind": "ai",
+    "blurb": "AI-powered resume screening tool. Upload a batch of PDFs, score candidates against a job description with a two-pass NLP pipeline (GPT-4o), and get a ranked shortlist with skill-gap analysis."
+  },
+  {
+    "name": "F1 Track",
+    "repo": "Hemz2006/F1-Track",
+    "year": "2025",
+    "stack": ["Visualization", "Real-time"],
+    "kind": "viz",
+    "blurb": "Interactive Formula 1 race visualization platform with 2D track replay, historical statistics, and real-time race data analysis."
+  },
+  {
+    "name": "Sepsis Prediction System",
+    "repo": "Hemz2006/Sepsis-Prediction-System",
+    "year": "2025",
+    "stack": ["Flask", "CNN-LSTM", "SOFA"],
+    "kind": "ai",
+    "blurb": "Clinical decision-support web app to predict, monitor, and analyze sepsis progression. Built on Flask + SQLAlchemy with ML-driven scoring (SOFA, qSOFA, NEWS2, Septic Shock).",
+    "private": true
+  },
+  {
+    "name": "Resume / JD Matcher",
+    "repo": "Hemz2006/Resume-Job-Description-Matcher",
+    "year": "2025",
+    "stack": ["SBERT", "MiniLM", "NLP"],
+    "kind": "ai",
+    "blurb": "SBERT Bi-Encoder + MiniLM Cross-Encoder for semantic similarity. Weighted ensemble scoring to simulate ATS systems."
+  },
+  {
+    "name": "Word2Vec From Scratch",
+    "repo": "Hemz2006/Word2Vec-From-Scratch-Skip-Gram-and-CBOW-PCA-Visualization-",
+    "year": "2024",
+    "stack": ["NumPy", "Skip-Gram", "CBOW"],
+    "kind": "ai",
+    "blurb": "Skip-Gram and CBOW Word2Vec built from scratch in Python + NumPy. Trained on WikiText-103 with negative sampling, with PCA visualizations of learned embeddings."
+  },
+  {
+    "name": "AirTime",
+    "repo": "Hemz2006/AirTime-The-Personal-Pollution-Budget",
+    "year": "2025",
+    "stack": ["NASA TEMPO", "ML", "Web"],
+    "kind": "viz",
+    "blurb": "A personal pollution budget. Combines NASA TEMPO satellite data, ground sensors, and weather forecasts to track real-time exposure and suggest safer outdoor windows."
+  },
+  {
+    "name": "Predictive Maintenance",
+    "repo": "Hemz2006/Hybrid-Predictive-Maintenance-using-Enhanced-CMAPSS-NASA-Dataset",
+    "year": "2024",
+    "stack": ["KMeans", "RF", "CMAPSS"],
+    "kind": "ai",
+    "blurb": "Predictive maintenance on NASA CMAPSS engine data. KMeans clusters wear stages, Logistic Regression classifies engine health, and Random Forest predicts Remaining Useful Life."
+  },
+  {
+    "name": "Stammering Prevention",
+    "repo": "Hemz2006/Stammering-Prevention-App",
+    "year": "2022",
+    "stack": ["Android", "Java"],
+    "kind": "app",
+    "blurb": "Android app to help users manage stammering through structured video lessons, personalized learning modules, and progress tracking with offline access."
+  },
+  {
+    "name": "2D Platformer",
+    "repo": null,
+    "external": "https://itch.io",
+    "year": "2024",
+    "stack": ["Unity", "C#", "FSM"],
+    "kind": "game",
+    "blurb": "Complete 2D platformer in Unity + C#. Physics-based movement, finite state machines, rule-based enemy AI. Final build deployed publicly on Itch.io."
+  },
+  {
+    "name": "ROSE Jewellery",
+    "repo": null,
+    "year": "2022",
+    "stack": ["Web", "Freelance"],
+    "kind": "web",
+    "blurb": "Interactive jewellery showcase with embedded video demos, testimonial slider, Google Maps, and contact form wired to Google Sheets."
+  }
+]
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="interactivity.jsx"></script>
+<script type="text/babel" src="portfolio.jsx"></script>
+</head>
+<body>
+  <div class="grain"></div>
+  <div id="root"></div>
+</body>
+</html>
